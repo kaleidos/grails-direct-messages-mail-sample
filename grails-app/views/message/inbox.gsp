@@ -3,24 +3,24 @@
 <!DOCTYPE html>
 <html>
     <head>
-        <title>Inbox</title>
+        <title><g:message code="inbox.title" /></title>
         <meta name="layout" content="base">
         <link rel="stylesheet" href="${resource(dir: 'css', file: 'main.css')}" type="text/css">
     </head>
     <body>
-        <h1>My Messages</h1>
+        <h1><g:message code="inbox.myMessages" /></h1>
         <div></div>
         <div>
-            <span>Inbox</span>
+            <span><g:message code="inbox.inbox" /></span>
             <span>|</span>
-            <span>Sent Items</span>
+            <span><g:message code="inbox.sentItems" /></span>
         </div>
         <div>
             <table>
                 <tr>
-                    <th>FROM</th>
-                    <th>SUBJECT</th>
-                    <th>RECEIVED</th>
+                    <th><g:message code="inbox.from" /></th>
+                    <th><g:message code="inbox.subject" /></th>
+                    <th><g:message code="inbox.received" /></th>
                 </tr>
                 <g:each in="${messages}" var="entry">
                     <tr>
