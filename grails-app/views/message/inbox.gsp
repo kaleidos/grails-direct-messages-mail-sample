@@ -18,9 +18,27 @@
         <div>
             <table class="messages">
                 <tr>
-                    <th class="from"><g:message code="inbox.from" /></th>
-                    <th class="subject"><g:message code="inbox.subject" /></th>
-                    <th class="date"><g:message code="inbox.received" /></th>
+                    <th class="from">
+                        <g:link mapping="inbox" params="[sort:'fromId']"><g:message code="inbox.from" />
+                            <g:if test="${sort=='fromId'}">
+                                <img src="${resource(dir: 'images', file: 'triangleDown.png')}" />
+                            </g:if>
+                        </g:link>
+                    </th>
+                    <th class="subject">
+                        <g:link mapping="inbox" params="[sort:'subject']"><g:message code="inbox.subject" />
+                            <g:if test="${sort=='subject'}">
+                                <img src="${resource(dir: 'images', file: 'triangleDown.png')}" />
+                            </g:if>
+                        </g:link>
+                    </th>
+                    <th class="date">
+                        <g:link mapping="inbox" params="[sort:'dateCreated']"><g:message code="inbox.received" />
+                            <g:if test="${sort=='dateCreated'}">
+                                <img src="${resource(dir: 'images', file: 'triangleDown.png')}" />
+                            </g:if>
+                        </g:link>
+                    </th>
                 </tr>
                 <g:each in="${messages}" var="entry">
                     <tr>
