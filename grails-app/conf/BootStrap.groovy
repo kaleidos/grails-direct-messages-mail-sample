@@ -1,6 +1,9 @@
 import net.kaleidos.directmessagesmailsample.User
 import net.kaleidos.directmessages.Message
+import net.kaleidos.directmessages.DirectMessageService
+
 class BootStrap {
+    def directMessageService
 
     def init = { servletContext ->
 
@@ -15,18 +18,17 @@ class BootStrap {
 
 
 
-        //Message from Paul to Bob
-        new Message(fromId:paul.id, toId:bob.id, text:'Hi, buddy', last:false, readed: true).save()
-        new Message(fromId:bob.id, toId:paul.id, text:'Hello, Paul', last:true, readed: false).save()
+        //Messages between Paul and Bob
+        directMessageService.sendMessage(paul.id, bob.id, 'Hi buddy', 'Hello')
+        directMessageService.sendMessage(bob.id, paul.id, 'Hello, my friend', 'Hello')
+        directMessageService.sendMessage(paul.id, bob.id, 'How are you?', 'Hello')
 
-        //Message from Paul to Alice
-        new Message(fromId:paul.id, toId:alice.id, text:'Hi, Alice', last:true, readed: true).save()
+        directMessageService.sendMessage(bob.id, paul.id, 'Did you seen last night movie?', 'Movie')
+
+        directMessageService.sendMessage(paul.id, bob.id, 'Are you free on friday?', 'Friday')
+        directMessageService.sendMessage(bob.id, paul.id, 'yes, why?', 'Friday')
 
 
-        //Message from Paul to Sam
-        new Message(fromId:paul.id, toId:sam.id, text:'Hello', last:false, readed: true).save()
-        new Message(fromId:sam.id, toId:paul.id, text:'Hi. Did you see the direct messages plugin for grails?', last:false, readed: true).save()
-        new Message(fromId:paul.id, toId:sam.id, text:'Yea, it is cool', last:true, readed: true).save()
 
 
 
