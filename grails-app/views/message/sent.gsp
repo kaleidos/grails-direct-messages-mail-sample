@@ -16,11 +16,11 @@
             <span class="selected"><g:message code="sent.sentItems" /></span>
         </div>
         <div>
-            <table>
+            <table class="messages">
                 <tr>
-                    <th><g:message code="sent.to" /></th>
-                    <th><g:message code="sent.subject" /></th>
-                    <th><g:message code="sent.sent" /></th>
+                    <th class="to"><g:message code="sent.to" /></th>
+                    <th class="subject"><g:message code="sent.subject" /></th>
+                    <th class="date"><g:message code="sent.sent" /></th>
                 </tr>
                 <g:each in="${messages}" var="entry">
                     <tr>

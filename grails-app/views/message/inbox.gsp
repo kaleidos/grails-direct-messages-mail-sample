@@ -16,11 +16,11 @@
             <span><g:link mapping="sent"><g:message code="inbox.sentItems" /></g:link></span>
         </div>
         <div>
-            <table>
+            <table class="messages">
                 <tr>
-                    <th><g:message code="inbox.from" /></th>
-                    <th><g:message code="inbox.subject" /></th>
-                    <th><g:message code="inbox.received" /></th>
+                    <th class="from"><g:message code="inbox.from" /></th>
+                    <th class="subject"><g:message code="inbox.subject" /></th>
+                    <th class="date"><g:message code="inbox.received" /></th>
                 </tr>
                 <g:each in="${messages}" var="entry">
                     <tr>
@@ -34,6 +34,9 @@
                 </g:each>
 
             </table>
+        </div>
+        <div class="paginateButtons">
+            <g:paginate mapping="inbox" total="${totalNum}" max="${max}"/>
         </div>
     </body>
 </html>
