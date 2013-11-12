@@ -18,6 +18,7 @@
         <div>
             <table class="messages">
                 <tr>
+                    <th class="icon">&nbsp;</th>
                     <th class="to">
                         <g:render template="sortableHeader" model="[sort:sort, order:order, label:'sent.to', field:'toId', mapping:'sent']"/>
                     </th>
@@ -30,9 +31,14 @@
                 </tr>
                 <g:each in="${messages}" var="entry">
                     <tr>
+                        <td>
+                            <g:if test="${entry.lastOnSubject}">
+                                <img src="${resource(dir: 'images', file: 'arrowLeft.png')}" />
+                            </g:if>
+                        </td>
                         <td>${User.get(entry.toId).username}</td>
                         <td>
-                            <g:if test="${entry.reply}"><g:message code="sent.re" />&nbsp;</g:if>
+                            <g:if test="${entry.reply}"><g:message code="sent.re" />:&nbsp;</g:if>
                             ${entry.subject}
                         </td>
                         <td><g:formatDate format="yyyy-MM-dd HH:mm" date="${entry.dateCreated}"/></td>
