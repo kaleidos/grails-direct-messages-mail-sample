@@ -23,6 +23,10 @@
     width: 60%;
 }
 
+.unreaded {
+    font-weight: bold;
+}
+
 /* PAGINATION */
 
 .paginateButtons {
