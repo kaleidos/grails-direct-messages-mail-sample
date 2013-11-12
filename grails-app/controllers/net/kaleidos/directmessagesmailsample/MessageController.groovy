@@ -101,7 +101,8 @@ class MessageController {
     def saveNewMessage() {
         def currentUser = springSecurityService.currentUser
         def toUser = User.get(params.toId)
-        if (toUser && params.subject) {
+
+        if (toUser && params.subject && params.text && params.text.size()<=5000) {
             directMessageService.sendMessage(currentUser.id, toUser.id, params.text, params.subject)
             flash.message = message(code: 'thread.success')
         } else {

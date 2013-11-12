@@ -35,6 +35,7 @@
     padding: 0.25em;
     background: #f3f3ff;
     border: 1px solid #b2d1ff;
+    word-wrap: break-word;
 }
 
 .thread_item .text {

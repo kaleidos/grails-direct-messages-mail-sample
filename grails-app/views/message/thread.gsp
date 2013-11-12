@@ -29,14 +29,14 @@
         </g:each>
         <div class="new_message">
             <g:message code='thread.reply'/>
-            <g:form method="POST" mapping="newMessage">
-                <input type="hidden" name="subject" value="${messages[0].subject}" />
+            <form method="post" action="<g:createLink mapping='newMessage' />" onsubmit="return checkNewMessage()">
+                <input id="subject" type="hidden" name="subject" value="${messages[0].subject}" />
                 <input type="hidden" name="toId" value="${otherUser.id}" />
-                <textarea class="new_message_text" name="text"></textarea>
+                <textarea id="text" class="new_message_text" name="text" maxlength="5000"></textarea>
                 <div class="submit_button">
                     <input type="submit" value="<g:message code='thread.send'/>" />
                 </div>
-            </g:form>
+            </form>
         </div>
 
 
