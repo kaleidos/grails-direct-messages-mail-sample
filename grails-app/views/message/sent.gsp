@@ -36,7 +36,10 @@
                                 <img src="${resource(dir: 'images', file: 'arrowLeft.png')}" />
                             </g:if>
                         </td>
-                        <td>${User.get(entry.toId).username}</td>
+                        <td>
+                            ${User.get(entry.toId).username}
+                            (${entry.numberOfMessagesOnSubject})
+                        </td>
                         <td>
                             <g:if test="${entry.reply}"><g:message code="sent.re" />:&nbsp;</g:if>
                             ${entry.subject}

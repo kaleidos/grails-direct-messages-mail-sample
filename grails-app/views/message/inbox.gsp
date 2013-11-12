@@ -42,7 +42,10 @@
                             </g:else>
 
                         </td>
-                        <td>${User.get(entry.fromId).username}</td>
+                        <td>
+                            ${User.get(entry.fromId).username}
+                            (${entry.numberOfMessagesOnSubject})
+                        </td>
                         <td>
                             <g:if test="${entry.reply}"><g:message code="inbox.re" />:&nbsp;</g:if>
                             ${entry.subject}
