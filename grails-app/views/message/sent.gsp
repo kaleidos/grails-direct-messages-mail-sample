@@ -18,9 +18,15 @@
         <div>
             <table class="messages">
                 <tr>
-                    <th class="to"><g:message code="sent.to" /></th>
-                    <th class="subject"><g:message code="sent.subject" /></th>
-                    <th class="date"><g:message code="sent.sent" /></th>
+                    <th class="to">
+                        <g:render template="sortableHeader" model="[sort:sort, order:order, label:'sent.to', field:'toId', mapping:'sent']"/>
+                    </th>
+                    <th class="subject">
+                        <g:render template="sortableHeader" model="[sort:sort, order:order, label:'sent.subject', field:'subject', mapping:'sent']"/>
+                    </th>
+                    <th class="date">
+                        <g:render template="sortableHeader" model="[sort:sort, order:order, label:'sent.sent', field:'dateCreated', mapping:'sent']"/>
+                    </th>
                 </tr>
                 <g:each in="${messages}" var="entry">
                     <tr>

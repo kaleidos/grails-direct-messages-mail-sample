@@ -49,7 +49,7 @@ class MessageController {
 
         if (params.sort == 'toId') {
             sort = 'toId'
-        } else if (sort == 'subject') {
+        } else if (params.sort == 'subject') {
             sort = 'subject'
         } else {
             sort = 'dateCreated'
@@ -59,7 +59,7 @@ class MessageController {
             order = 'des'
         }
 
-        def result = directMessageService.getSentMessagesBySubject(currentUser.id)
+        def result = directMessageService.getSentMessagesBySubject(currentUser.id, 0, -1, sort, order)
 
 
         render view:'sent', model:[user:currentUser, messages:result.messages, totalNum:result.totalNum, sort:sort, order:order]

@@ -19,13 +19,13 @@
             <table class="messages">
                 <tr>
                     <th class="from">
-                        <g:render template="sortableHeader" model="[sort:sort, order:order, label:'inbox.from', field:'fromId']"/>
+                        <g:render template="sortableHeader" model="[sort:sort, order:order, label:'inbox.from', field:'fromId', mapping:'inbox']"/>
                     </th>
                     <th class="subject">
-                        <g:render template="sortableHeader" model="[sort:sort, order:order, label:'inbox.subject', field:'subject']"/>
+                        <g:render template="sortableHeader" model="[sort:sort, order:order, label:'inbox.subject', field:'subject', mapping:'inbox']"/>
                     </th>
                     <th class="date">
-                        <g:render template="sortableHeader" model="[sort:sort, order:order, label:'inbox.received', field:'dateCreated']"/>
+                        <g:render template="sortableHeader" model="[sort:sort, order:order, label:'inbox.received', field:'dateCreated', mapping:'inbox']"/>
                     </th>
                 </tr>
                 <g:each in="${messages}" var="entry">
