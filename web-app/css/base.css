@@ -16,11 +16,12 @@
 }
 
 .messages .date{
-    width: 15%;
+    width: 20%;
 }
 
-.messages .subject {
-    width: 60%;
+
+.messages .delete, .messages .icon {
+    width: 3%;
 }
 
 .unreaded {

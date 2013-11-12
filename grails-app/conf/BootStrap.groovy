@@ -29,18 +29,25 @@ class BootStrap {
         directMessageService.sendMessage(paul.id, bob.id, "Are you free on friday?", "Friday")
         directMessageService.sendMessage(bob.id, paul.id, "yes, why?", "Friday")
 
+        //Messages between Paul and Alice
+        directMessageService.sendMessage(paul.id, alice.id, "Hi Alice", "How are you?")
+        directMessageService.sendMessage(alice.id, paul.id, "Hi Paul", "How are you?")
+        directMessageService.sendMessage(paul.id, alice.id, "Are you ok?", "How are you?")
+
+
 
         //Messages for pagination
         def users = [alice, bob, sam]
         def random = new Random()
+        def user
         90.times{
-            def user = users[random.nextInt(users.size())]
+            user = users[random.nextInt(users.size())]
             directMessageService.sendMessage(user.id, paul.id, "Message number ${it}", "Subject ${it}")
         }
 
 
         90.times{
-            def user = users[random.nextInt(users.size())]
+            user = users[random.nextInt(users.size())]
             directMessageService.sendMessage(paul.id, user.id, "Message number ${90+it}", "Subject ${90+it}")
         }
 

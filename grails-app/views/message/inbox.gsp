@@ -18,6 +18,8 @@
         <div>
             <table class="messages">
                 <tr>
+                    <th class="delete">&nbsp;</th>
+                    <th class="icon">&nbsp;</th>
                     <th class="from">
                         <g:render template="sortableHeader" model="[sort:sort, order:order, label:'inbox.from', field:'fromId', mapping:'inbox']"/>
                     </th>
@@ -30,6 +32,16 @@
                 </tr>
                 <g:each in="${messages}" var="entry">
                     <tr <g:if test="${!entry.readed}">class="unreaded"</g:if>>
+                        <td></td>
+                        <td>
+                            <g:if test="${entry.lastOnSubject}">
+                                <img src="${resource(dir: 'images', file: 'arrowLeft.png')}" />
+                            </g:if>
+                            <g:else>
+                                <img src="${resource(dir: 'images', file: 'letter.png')}" />
+                            </g:else>
+
+                        </td>
                         <td>${User.get(entry.fromId).username}</td>
                         <td>
                             <g:if test="${entry.reply}"><g:message code="inbox.re" />:&nbsp;</g:if>
