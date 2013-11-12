@@ -1,5 +1,6 @@
 package net.kaleidos.directmessagesmailsample
 import net.kaleidos.directmessages.DirectMessageService
+import net.kaleidos.directmessages.Message
 import grails.plugins.springsecurity.Secured
 
 @Secured(['IS_AUTHENTICATED_REMEMBERED'])
@@ -63,6 +64,19 @@ class MessageController {
 
 
         render view:'sent', model:[user:currentUser, messages:result.messages, totalNum:result.totalNum, sort:sort, order:order]
+    }
+
+    def view() {
+        def currentUser = springSecurityService.currentUser
+        def message = Message.get(params.messageId)
+        //If the message exists and the user can view the message
+        if ((message) &&
+            ((message.fromId == currentUser.id) || (message.toId == currentUser.id))) {
+                def messages = directMessageService.findAllMessagesOnSubject(message)
+                render view:'thread', model:[user:currentUser, messages:messages, subject:message.subject]
+        } else {
+            redirect mapping: 'inbox'
+        }
     }
 
 }

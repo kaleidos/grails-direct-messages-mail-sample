@@ -9,6 +9,7 @@ class UrlMappings {
 
         name inbox: "/" {controller = 'message'; action = 'inbox'}
         name sent: "/sent" {controller = 'message'; action = 'sent'}
+        name view: "/view" {controller = 'message'; action = 'view'}
         "500"(view:'/error')
     }
 }

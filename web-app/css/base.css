@@ -28,6 +28,19 @@
     font-weight: bold;
 }
 
+.thread_item {
+    font-size: 0.8em;
+    line-height: 2;
+    margin: 1em 2em;
+    padding: 0.25em;
+    background: #f3f3ff;
+    border: 1px solid #b2d1ff;
+}
+
+.thread_item .text {
+    color: #006dba;
+}
+
 /* PAGINATION */
 
 .paginateButtons {

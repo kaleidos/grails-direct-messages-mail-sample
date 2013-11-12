@@ -47,8 +47,10 @@
                             (${entry.numberOfMessagesOnSubject})
                         </td>
                         <td>
-                            <g:if test="${entry.reply}"><g:message code="inbox.re" />:&nbsp;</g:if>
-                            ${entry.subject}
+                            <g:link mapping="view" params="[messageId:entry.id]">
+                                <g:if test="${entry.reply}"><g:message code="inbox.re" />:&nbsp;</g:if>
+                                ${entry.subject}
+                            </g:link>
                         </td>
                         <td><g:formatDate format="yyyy-MM-dd HH:mm" date="${entry.dateCreated}"/></td>
                     </tr>
