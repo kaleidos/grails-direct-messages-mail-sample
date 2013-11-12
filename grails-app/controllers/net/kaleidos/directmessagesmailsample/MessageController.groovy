@@ -15,7 +15,7 @@ class MessageController {
         def currentUser = springSecurityService.currentUser
         def offset = 0
         def sort
-        def order = 'asc'
+        def order = 'des'
 
 
         if (params.sort == 'fromId') {
@@ -26,8 +26,8 @@ class MessageController {
             sort = 'dateCreated'
         }
 
-        if (params.order == 'des') {
-            order = 'des'
+        if (params.order == 'asc') {
+            order = 'asc'
         }
 
         if (params.offset) {
@@ -45,7 +45,7 @@ class MessageController {
     def sent() {
         def currentUser = springSecurityService.currentUser
         def sort
-        def order = 'asc'
+        def order = 'des'
 
 
         if (params.sort == 'toId') {
@@ -56,8 +56,8 @@ class MessageController {
             sort = 'dateCreated'
         }
 
-        if (params.order == 'des') {
-            order = 'des'
+        if (params.order == 'asc') {
+            order = 'asc'
         }
 
         def result = directMessageService.getSentMessagesBySubject(currentUser.id, 0, -1, sort, order)
@@ -73,10 +73,24 @@ class MessageController {
         if ((message) &&
             ((message.fromId == currentUser.id) || (message.toId == currentUser.id))) {
                 def messages = directMessageService.findAllMessagesOnSubject(message)
-                render view:'thread', model:[user:currentUser, messages:messages, subject:message.subject]
+                def otherUser = message.fromId == currentUser.id?User.get(message.toId):User.get(message.fromId)
+                render view:'thread', model:[user:currentUser, messages:messages, subject:message.subject, otherUser:otherUser]
         } else {
             redirect mapping: 'inbox'
         }
+    }
+
+    def newMessage() {
+        def currentUser = springSecurityService.currentUser
+        def toUser = User.get(params.toId)
+        if (toUser && params.subject) {
+            directMessageService.sendMessage(currentUser.id, toUser.id, params.text, params.subject)
+            flash.message = message(code: 'thread.success')
+        } else {
+            flash.error = message(code: 'thread.error')
+        }
+        redirect mapping: 'inbox'
+        return
     }
 
 }

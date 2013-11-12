@@ -64,3 +64,20 @@
 .paginateButtons span {
     padding: 2px 3px;
 }
+
+.new_message {
+    font-size: 0.8em;
+    line-height: 2;
+    margin: 1em 2em;
+    padding: 0.25em;
+}
+
+.new_message_text {
+    width: 890px;
+    height: 150px;
+}
+
+.new_message .submit_button {
+    text-align: right;
+    margin-top: 10px;
+}
