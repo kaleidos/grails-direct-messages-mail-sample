@@ -8,7 +8,7 @@
         <link rel="stylesheet" href="${resource(dir: 'css', file: 'main.css')}" type="text/css">
     </head>
     <body>
-        <h1><g:message code="inbox.myMessages" /></h1>
+        <h1><g:message code="inbox.myMessages" /> (${unreadedNum})</h1>
         <div></div>
         <div>
             <span class="selected"><g:message code="inbox.inbox" /></span>
