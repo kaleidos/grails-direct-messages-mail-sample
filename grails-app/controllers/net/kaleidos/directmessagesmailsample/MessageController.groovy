@@ -91,6 +91,15 @@ class MessageController {
 
     def newMessage() {
         def currentUser = springSecurityService.currentUser
+        def otherUser = User.get(params.toId)
+        if (otherUser) {
+            render view:'newMessage', model:[user:currentUser, otherUser:otherUser]
+        } else {
+            redirect mapping: 'inbox'
+        }
+    }
+    def saveNewMessage() {
+        def currentUser = springSecurityService.currentUser
         def toUser = User.get(params.toId)
         if (toUser && params.subject) {
             directMessageService.sendMessage(currentUser.id, toUser.id, params.text, params.subject)
@@ -99,7 +108,20 @@ class MessageController {
             flash.error = message(code: 'thread.error')
         }
         redirect mapping: 'inbox'
-        return
+    }
+
+    def userList() {
+        def currentUser = springSecurityService.currentUser
+        //Get user role, asumming one role per user
+        def role = UserRole.findByUser(currentUser).role
+        //Get a list of users with a diferent role that the currentUser
+        def list = UserRole.createCriteria().list{
+            ne 'role', role
+            projections {
+                property 'user'
+            }
+        }
+        render view:'userList', model:[user:currentUser, userList:list]
     }
 
 }

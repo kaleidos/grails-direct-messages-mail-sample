@@ -81,3 +81,12 @@
     text-align: right;
     margin-top: 10px;
 }
+
+.right {
+    text-align: right;
+    padding-right: 10px;
+}
+
+.subject {
+    width: 890px;
+}

@@ -9,7 +9,9 @@
     </head>
     <body>
         <h1><g:message code="inbox.myMessages" /> (${unreadedNum})</h1>
-        <div></div>
+        <div class="right">
+            <g:link mapping="userList"><g:message code='userList.newMessage'/></g:link>
+        </div>
         <div>
             <span class="selected"><g:message code="inbox.inbox" /></span>
             <span>|</span>

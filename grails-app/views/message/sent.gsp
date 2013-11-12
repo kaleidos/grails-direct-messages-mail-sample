@@ -9,7 +9,9 @@
     </head>
     <body>
         <h1><g:message code="sent.myMessages" /></h1>
-        <div></div>
+        <div class="right">
+            <g:link mapping="userList"><g:message code='userList.newMessage'/></g:link>
+        </div>
         <div>
             <span><g:link mapping="inbox"><g:message code="sent.inbox" /></g:link></span>
             <span>|</span>

@@ -22,7 +22,9 @@
             <div><g:message code='thread.to'/>: ${User.get(entry.toId).username}</div>
             <div><g:message code='thread.from'/>: ${User.get(entry.fromId).username}</div>
             <div><g:message code='thread.date'/>: <g:formatDate format="yyyy-MM-dd HH:mm" date="${entry.dateCreated}"/></div>
-            <div class="text">${entry.text}</div>
+            <div class="text">
+                <g:lines string="${entry.text}" />
+            </div>
         </div>
         </g:each>
         <div class="new_message">

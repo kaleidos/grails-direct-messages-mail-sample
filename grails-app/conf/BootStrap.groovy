@@ -1,4 +1,6 @@
 import net.kaleidos.directmessagesmailsample.User
+import net.kaleidos.directmessagesmailsample.Role
+import net.kaleidos.directmessagesmailsample.UserRole
 import net.kaleidos.directmessages.Message
 import net.kaleidos.directmessages.DirectMessageService
 import java.util.Random
@@ -10,12 +12,19 @@ class BootStrap {
 
         //Sample data
 
+        def roleBF = new Role(authority: 'ROLE_BF', description: 'BF role').save()
+        def roleWFC = new Role(authority: 'ROLE_WFC', description: 'WFC role').save()
+
         def paul = new User(username:"paul", password:"paul", enabled:true).save()
+        UserRole.create(paul, roleBF, true)
+
+
         def alice = new User(username:"alice", password:"alice", enabled:true).save()
+        UserRole.create(alice, roleWFC, true)
         def bob = new User(username:"bob", password:"bob", enabled:true).save()
+        UserRole.create(bob, roleWFC, true)
         def sam = new User(username:"sam", password:"sam", enabled:true).save()
-
-
+        UserRole.create(sam, roleWFC, true)
 
 
 

@@ -10,7 +10,8 @@ class UrlMappings {
         name inbox: "/" {controller = 'message'; action = 'inbox'}
         name sent: "/sent" {controller = 'message'; action = 'sent'}
         name view: "/view" {controller = 'message'; action = 'view'}
-        name view: "/newMessage" {controller = 'message'; action = [POST:'newMessage']}
+        name newMessage: "/newMessage" {controller = 'message'; action = [POST:'saveNewMessage', GET:'newMessage']}
+        name userList: "/users" {controller = 'message'; action = 'userList'}
         "500"(view:'/error')
     }
 }
