@@ -28,22 +28,6 @@ class BootStrap {
 
 
 
-        //Messages between Paul and Bob
-        directMessageService.sendMessage(paul.id, bob.id, "Hi buddy", "Hello")
-        directMessageService.sendMessage(bob.id, paul.id, "Hello, my friend", "Hello")
-        directMessageService.sendMessage(paul.id, bob.id, "How are you?", "Hello")
-
-        directMessageService.sendMessage(bob.id, paul.id, "Did you seen last night movie?", "Movie")
-
-        directMessageService.sendMessage(paul.id, bob.id, "Are you free on friday?", "Friday")
-        directMessageService.sendMessage(bob.id, paul.id, "yes, why?", "Friday")
-
-        //Messages between Paul and Alice
-        directMessageService.sendMessage(paul.id, alice.id, "Hi Alice", "How are you?")
-        directMessageService.sendMessage(alice.id, paul.id, "Hi Paul", "How are you?")
-        directMessageService.sendMessage(paul.id, alice.id, "Are you ok?", "How are you?")
-
-
 
         //Messages for pagination
         def users = [alice, bob, sam]
@@ -60,7 +44,42 @@ class BootStrap {
             directMessageService.sendMessage(paul.id, user.id, "Message number ${90+it}", "Subject ${90+it}")
         }
 
+        Message.list().each {
+            it.readed = true
+            it.save()
+        }
 
+
+        def message
+        //Messages between Paul and Bob
+        message = directMessageService.sendMessage(paul.id, bob.id, "Hi buddy", "Hello")
+        message.readed = true
+        message.save()
+        message = directMessageService.sendMessage(bob.id, paul.id, "Hello, my friend", "Hello")
+        message.readed = true
+        message.save()
+        message = directMessageService.sendMessage(paul.id, bob.id, "How are you?", "Hello")
+
+
+
+        message = directMessageService.sendMessage(bob.id, paul.id, "Did you seen last night movie?", "Movie")
+
+
+
+        message = directMessageService.sendMessage(paul.id, bob.id, "Are you free on friday?", "Friday")
+        message.readed = true
+        message.save()
+        message = directMessageService.sendMessage(bob.id, paul.id, "yes, why?", "Friday")
+
+
+        //Messages between Paul and Alice
+        message = directMessageService.sendMessage(paul.id, alice.id, "Hi Alice", "How are you?")
+        message.readed = true
+        message.save()
+        message = directMessageService.sendMessage(alice.id, paul.id, "Hi Paul", "How are you?")
+        message.readed = true
+        message.save()
+        message = directMessageService.sendMessage(paul.id, alice.id, "Are you ok?", "How are you?")
 
 
 

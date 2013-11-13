@@ -15,15 +15,18 @@ class MessageController {
         def currentUser = springSecurityService.currentUser
         def offset = 0
         def sort
-        def order = 'des'
+        def order = 'desc'
 
 
         if (params.sort == 'fromId') {
             sort = 'fromId'
         } else if (params.sort == 'subject') {
             sort = 'subject'
-        } else {
+        } else if (params.sort == 'dateCreated') {
             sort = 'dateCreated'
+        } else {
+            //If the user hadn't ask for a sort, make a special sort with the unreaded messages first
+            sort = 'readed'
         }
 
         if (params.order == 'asc') {
@@ -45,7 +48,7 @@ class MessageController {
     def sent() {
         def currentUser = springSecurityService.currentUser
         def sort
-        def order = 'des'
+        def order = 'desc'
 
 
         if (params.sort == 'toId') {
