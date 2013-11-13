@@ -7,6 +7,10 @@ import grails.plugins.springsecurity.Secured
 class MessageController {
     def threadMessageService
     def springSecurityService
+    def grailsApplication
+
+    //This needs the grails mail plugin
+    def mailService
 
     static Integer ITEMS_BY_PAGE = 20
 
@@ -145,6 +149,31 @@ class MessageController {
 
 
         flash.message = message(code: 'inbox.delete.success')
+        redirect mapping: 'inbox'
+
+    }
+
+    def reportUser() {
+        def currentUser = springSecurityService.currentUser
+        def admin = User.get(grailsApplication.config.admin_id)
+        def otherUser = User.get(params.userId)
+
+        if (admin && otherUser && currentUser != otherUser) {
+            def text = "${message(code: 'report.text')} ${otherUser.username} (${otherUser.id})"
+            threadMessageService.sendThreadMessage(currentUser.id, admin.id, text, message(code: 'report.subject'))
+
+            //This need the grails mail plugin
+            if (mailService) {
+                mailService.sendMail{
+                    to adminEmail
+                    from currentUser.email
+                    subject message(code: 'report.subject')
+                    body text
+                }
+            }
+
+            flash.message = message(code: 'report.success')
+        }
         redirect mapping: 'inbox'
 
     }

@@ -91,3 +91,8 @@
 .subject {
     width: 890px;
 }
+
+.half {
+    width: 45%;
+    display: inline-block;
+}

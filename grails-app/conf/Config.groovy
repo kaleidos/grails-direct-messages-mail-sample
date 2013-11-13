@@ -94,3 +94,7 @@ log4j = {
 grails.plugins.springsecurity.userLookup.userDomainClassName = 'net.kaleidos.directmessagesmailsample.User'
 grails.plugins.springsecurity.userLookup.authorityJoinClassName = 'net.kaleidos.directmessagesmailsample.UserRole'
 grails.plugins.springsecurity.authority.className = 'net.kaleidos.directmessagesmailsample.Role'
+
+
+
+admin_id = 1

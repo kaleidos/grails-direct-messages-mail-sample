@@ -10,20 +10,26 @@ class BootStrap {
 
     def init = { servletContext ->
 
+
+
         //Sample data
+
+        new User(username:"admin", password:"admin", email:"admin@example.com", enabled:true).save()
+
+
 
         def roleBF = new Role(authority: 'ROLE_BF', description: 'BF role').save()
         def roleWFC = new Role(authority: 'ROLE_WFC', description: 'WFC role').save()
 
-        def paul = new User(username:"paul", password:"paul", enabled:true).save()
+        def paul = new User(username:"paul", password:"paul", email:"paul@example.com", enabled:true).save()
         UserRole.create(paul, roleBF, true)
 
 
-        def alice = new User(username:"alice", password:"alice", enabled:true).save()
+        def alice = new User(username:"alice", password:"alice", email:"alice@example.com", enabled:true).save()
         UserRole.create(alice, roleWFC, true)
-        def bob = new User(username:"bob", password:"bob", enabled:true).save()
+        def bob = new User(username:"bob", password:"bob", email:"bob@example.com", enabled:true).save()
         UserRole.create(bob, roleWFC, true)
-        def sam = new User(username:"sam", password:"sam", enabled:true).save()
+        def sam = new User(username:"sam", password:"sam", email:"sam@example.com", enabled:true).save()
         UserRole.create(sam, roleWFC, true)
 
 
