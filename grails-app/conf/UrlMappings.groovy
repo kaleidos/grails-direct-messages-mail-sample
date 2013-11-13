@@ -14,6 +14,7 @@ class UrlMappings {
         name newMessage: "/newMessage" {controller = 'message'; action = [POST:'saveNewMessage', GET:'newMessage']}
         name userList: "/users" {controller = 'message'; action = 'userList'}
         name reportUser: "/report" {controller = 'message'; action = 'reportUser'}
+        name blockUser: "/block" {controller = 'message'; action = 'blockUser'}
         "500"(view:'/error')
     }
 }

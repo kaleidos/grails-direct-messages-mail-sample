@@ -109,11 +109,18 @@ class MessageController {
         def currentUser = springSecurityService.currentUser
         def toUser = User.get(params.toId)
 
-        if (toUser && params.subject && params.text && params.text.size()<=5000) {
-            threadMessageService.sendThreadMessage(currentUser.id, toUser.id, params.text, params.subject)
-            flash.message = message(code: 'thread.success')
-        } else {
-            flash.error = message(code: 'thread.error')
+        if (toUser) {
+            def userBlock = UserBlock.findByUserAndUserBlocked(toUser, currentUser)
+            if (!userBlock) {
+                if (params.subject && params.text && params.text.size()<=5000) {
+                    threadMessageService.sendThreadMessage(currentUser.id, toUser.id, params.text, params.subject)
+                    flash.message = message(code: 'thread.success')
+                } else {
+                    flash.error = message(code: 'thread.error')
+                }
+            } else {
+                flash.error = message(code: 'block.error', args:[toUser.username])
+            }
         }
         redirect mapping: 'inbox'
     }
@@ -176,6 +183,22 @@ class MessageController {
         }
         redirect mapping: 'inbox'
 
+    }
+
+
+    def blockUser() {
+        def currentUser = springSecurityService.currentUser
+        def otherUser = User.get(params.userId)
+
+        if (otherUser && currentUser != otherUser) {
+            def userBlock = UserBlock.findByUserAndUserBlocked(currentUser, otherUser)
+            if (!userBlock) {
+                userBlock = new UserBlock(user:currentUser, userBlocked: otherUser)
+                userBlock.save()
+            }
+            flash.message = message(code: 'block.success', args:[otherUser.username])
+        }
+        redirect mapping: 'inbox'
     }
 
 }
