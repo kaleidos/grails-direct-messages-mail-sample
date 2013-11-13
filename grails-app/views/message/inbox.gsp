@@ -36,7 +36,7 @@
                     <tr <g:if test="${!entry.readed}">class="unreaded"</g:if>>
                         <td></td>
                         <td>
-                            <g:if test="${entry.lastOnSubject}">
+                            <g:if test="${entry.lastOnThread}">
                                 <img src="${resource(dir: 'images', file: 'arrowLeft.png')}" />
                             </g:if>
                             <g:else>
@@ -46,7 +46,7 @@
                         </td>
                         <td>
                             ${User.get(entry.fromId).username}
-                            (${entry.numberOfMessagesOnSubject})
+                            (${entry.numberOfMessagesOnThread})
                         </td>
                         <td>
                             <g:link mapping="view" params="[messageId:entry.id]">

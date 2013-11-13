@@ -34,13 +34,13 @@
                 <g:each in="${messages}" var="entry">
                     <tr>
                         <td>
-                            <g:if test="${entry.lastOnSubject}">
+                            <g:if test="${entry.lastOnThread}">
                                 <img src="${resource(dir: 'images', file: 'arrowLeft.png')}" />
                             </g:if>
                         </td>
                         <td>
                             ${User.get(entry.toId).username}
-                            (${entry.numberOfMessagesOnSubject})
+                            (${entry.numberOfMessagesOnThread})
                         </td>
                         <td>
                             <g:link mapping="view" params="[messageId:entry.id]">

@@ -1,11 +1,11 @@
 package net.kaleidos.directmessagesmailsample
-import net.kaleidos.directmessages.DirectMessageService
+import net.kaleidos.directmessages.ThreadMessageService
 import net.kaleidos.directmessages.Message
 import grails.plugins.springsecurity.Secured
 
 @Secured(['IS_AUTHENTICATED_REMEMBERED'])
 class MessageController {
-    def directMessageService
+    def threadMessageService
     def springSecurityService
 
     static Integer ITEMS_BY_PAGE = 20
@@ -41,7 +41,7 @@ class MessageController {
             }
         }
 
-        def result = directMessageService.getReceivedMessagesBySubject(currentUser.id, offset, ITEMS_BY_PAGE, sort, order)
+        def result = threadMessageService.getReceivedByThread(currentUser.id, offset, ITEMS_BY_PAGE, sort, order)
         render view:'inbox', model:[user:currentUser, messages:result.messages, totalNum:result.totalNum, unreadedNum:result.unreadedNum, max:ITEMS_BY_PAGE, sort:sort, order:order]
     }
 
@@ -63,7 +63,7 @@ class MessageController {
             order = 'asc'
         }
 
-        def result = directMessageService.getSentMessagesBySubject(currentUser.id, 0, -1, sort, order)
+        def result = threadMessageService.getSentByThread(currentUser.id, 0, -1, sort, order)
 
 
         render view:'sent', model:[user:currentUser, messages:result.messages, totalNum:result.totalNum, sort:sort, order:order]
@@ -75,7 +75,7 @@ class MessageController {
         //If the message exists and the user can view the message
         if ((message) &&
             ((message.fromId == currentUser.id) || (message.toId == currentUser.id))) {
-                def messages = directMessageService.findAllMessagesOnSubject(message)
+                def messages = threadMessageService.findAllMessagesOnThread(message)
 
                 //Mark as readed
                 messages.each {
@@ -106,7 +106,7 @@ class MessageController {
         def toUser = User.get(params.toId)
 
         if (toUser && params.subject && params.text && params.text.size()<=5000) {
-            directMessageService.sendMessage(currentUser.id, toUser.id, params.text, params.subject)
+            threadMessageService.sendThreadMessage(currentUser.id, toUser.id, params.text, params.subject)
             flash.message = message(code: 'thread.success')
         } else {
             flash.error = message(code: 'thread.error')

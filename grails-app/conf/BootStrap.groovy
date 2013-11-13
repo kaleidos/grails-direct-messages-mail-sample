@@ -2,11 +2,11 @@ import net.kaleidos.directmessagesmailsample.User
 import net.kaleidos.directmessagesmailsample.Role
 import net.kaleidos.directmessagesmailsample.UserRole
 import net.kaleidos.directmessages.Message
-import net.kaleidos.directmessages.DirectMessageService
+import net.kaleidos.directmessages.ThreadMessageService
 import java.util.Random
 
 class BootStrap {
-    def directMessageService
+    def threadMessageService
 
     def init = { servletContext ->
 
@@ -35,13 +35,13 @@ class BootStrap {
         def user
         90.times{
             user = users[random.nextInt(users.size())]
-            directMessageService.sendMessage(user.id, paul.id, "Message number ${it}", "Subject ${it}")
+            threadMessageService.sendThreadMessage(user.id, paul.id, "Message number ${it}", "Subject ${it}")
         }
 
 
         90.times{
             user = users[random.nextInt(users.size())]
-            directMessageService.sendMessage(paul.id, user.id, "Message number ${90+it}", "Subject ${90+it}")
+            threadMessageService.sendThreadMessage(paul.id, user.id, "Message number ${90+it}", "Subject ${90+it}")
         }
 
         Message.list().each {
@@ -52,34 +52,34 @@ class BootStrap {
 
         def message
         //Messages between Paul and Bob
-        message = directMessageService.sendMessage(paul.id, bob.id, "Hi buddy", "Hello")
+        message = threadMessageService.sendThreadMessage(paul.id, bob.id, "Hi buddy", "Hello")
         message.readed = true
         message.save()
-        message = directMessageService.sendMessage(bob.id, paul.id, "Hello, my friend", "Hello")
+        message = threadMessageService.sendThreadMessage(bob.id, paul.id, "Hello, my friend", "Hello")
         message.readed = true
         message.save()
-        message = directMessageService.sendMessage(paul.id, bob.id, "How are you?", "Hello")
+        message = threadMessageService.sendThreadMessage(paul.id, bob.id, "How are you?", "Hello")
 
 
 
-        message = directMessageService.sendMessage(bob.id, paul.id, "Did you seen last night movie?", "Movie")
+        message = threadMessageService.sendThreadMessage(bob.id, paul.id, "Did you seen last night movie?", "Movie")
 
 
 
-        message = directMessageService.sendMessage(paul.id, bob.id, "Are you free on friday?", "Friday")
+        message = threadMessageService.sendThreadMessage(paul.id, bob.id, "Are you free on friday?", "Friday")
         message.readed = true
         message.save()
-        message = directMessageService.sendMessage(bob.id, paul.id, "yes, why?", "Friday")
+        message = threadMessageService.sendThreadMessage(bob.id, paul.id, "yes, why?", "Friday")
 
 
         //Messages between Paul and Alice
-        message = directMessageService.sendMessage(paul.id, alice.id, "Hi Alice", "How are you?")
+        message = threadMessageService.sendThreadMessage(paul.id, alice.id, "Hi Alice", "How are you?")
         message.readed = true
         message.save()
-        message = directMessageService.sendMessage(alice.id, paul.id, "Hi Paul", "How are you?")
+        message = threadMessageService.sendThreadMessage(alice.id, paul.id, "Hi Paul", "How are you?")
         message.readed = true
         message.save()
-        message = directMessageService.sendMessage(paul.id, alice.id, "Are you ok?", "How are you?")
+        message = threadMessageService.sendThreadMessage(paul.id, alice.id, "Are you ok?", "How are you?")
 
 
 
