@@ -128,4 +128,25 @@ class MessageController {
         render view:'userList', model:[user:currentUser, userList:list]
     }
 
+    def deleteMessages() {
+        def currentUser = springSecurityService.currentUser
+        def ids = params.list('deleteId')
+        ids.each {id->
+            try {
+                Message m = Message.get(Long.parseLong(id))
+                if (m) {
+                    threadMessageService.deleteMessagesOnThread(currentUser.id, m)
+                }
+
+            }catch (NumberFormatException e){
+                //Ignore
+            }
+        }
+
+
+        flash.message = message(code: 'inbox.delete.success')
+        redirect mapping: 'inbox'
+
+    }
+
 }

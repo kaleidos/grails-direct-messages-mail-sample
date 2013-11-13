@@ -8,6 +8,7 @@ class UrlMappings {
         }
 
         name inbox: "/" {controller = 'message'; action = 'inbox'}
+        name deleteMessages: "/delete" {controller = 'message'; action = [POST:'deleteMessages']}
         name sent: "/sent" {controller = 'message'; action = 'sent'}
         name view: "/view" {controller = 'message'; action = 'view'}
         name newMessage: "/newMessage" {controller = 'message'; action = [POST:'saveNewMessage', GET:'newMessage']}
