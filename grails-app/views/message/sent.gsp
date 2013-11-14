@@ -22,7 +22,7 @@
                 <tr>
                     <th class="icon">&nbsp;</th>
                     <th class="to">
-                        <g:render template="sortableHeader" model="[sort:sort, order:order, label:'sent.to', field:'toId', mapping:'sent']"/>
+                        <g:render template="sortableHeader" model="[sort:sort, order:order, label:'sent.to', field:'toName', mapping:'sent']"/>
                     </th>
                     <th class="subject">
                         <g:render template="sortableHeader" model="[sort:sort, order:order, label:'sent.subject', field:'subject', mapping:'sent']"/>

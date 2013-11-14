@@ -5,6 +5,7 @@ import grails.plugins.springsecurity.Secured
 
 @Secured(['IS_AUTHENTICATED_REMEMBERED'])
 class MessageController {
+    def mailMessagingService
     def threadMessageService
     def springSecurityService
     def grailsApplication
@@ -22,8 +23,8 @@ class MessageController {
         def order = 'desc'
 
 
-        if (params.sort == 'fromId') {
-            sort = 'fromId'
+        if (params.sort == 'fromName') {
+            sort = 'fromName'
         } else if (params.sort == 'subject') {
             sort = 'subject'
         } else if (params.sort == 'dateCreated') {
@@ -55,8 +56,8 @@ class MessageController {
         def order = 'desc'
 
 
-        if (params.sort == 'toId') {
-            sort = 'toId'
+        if (params.sort == 'toName') {
+            sort = 'toName'
         } else if (params.sort == 'subject') {
             sort = 'subject'
         } else {
@@ -113,7 +114,7 @@ class MessageController {
             def userBlock = UserBlock.findByUserAndUserBlocked(toUser, currentUser)
             if (!userBlock) {
                 if (params.subject && params.text && params.text.size()<=5000) {
-                    threadMessageService.sendThreadMessage(currentUser.id, toUser.id, params.text, params.subject)
+                    mailMessagingService.sendMessage(currentUser.id, toUser.id, params.text, params.subject)
                     flash.message = message(code: 'thread.success')
                 } else {
                     flash.error = message(code: 'thread.error')
@@ -167,7 +168,7 @@ class MessageController {
 
         if (admin && otherUser && currentUser != otherUser) {
             def text = "${message(code: 'report.text')} ${otherUser.name} (${otherUser.id})"
-            threadMessageService.sendThreadMessage(currentUser.id, admin.id, text, message(code: 'report.subject'))
+            mailMessagingService.sendMessage(currentUser.id, admin.id, text, message(code: 'report.subject'))
 
             //This need the grails mail plugin
             if (mailService) {

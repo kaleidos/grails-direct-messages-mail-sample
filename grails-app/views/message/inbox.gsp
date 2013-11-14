@@ -24,7 +24,7 @@
                         <th class="delete">&nbsp;</th>
                         <th class="icon">&nbsp;</th>
                         <th class="from">
-                            <g:render template="sortableHeader" model="[sort:sort, order:order, label:'inbox.from', field:'fromId', mapping:'inbox']"/>
+                            <g:render template="sortableHeader" model="[sort:sort, order:order, label:'inbox.from', field:'fromName', mapping:'inbox']"/>
                         </th>
                         <th class="subject">
                             <g:render template="sortableHeader" model="[sort:sort, order:order, label:'inbox.subject', field:'subject', mapping:'inbox']"/>

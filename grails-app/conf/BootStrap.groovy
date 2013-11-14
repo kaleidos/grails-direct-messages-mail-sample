@@ -2,21 +2,14 @@ import net.kaleidos.directmessagesmailsample.User
 import net.kaleidos.directmessagesmailsample.Role
 import net.kaleidos.directmessagesmailsample.UserRole
 import net.kaleidos.directmessages.Message
-import net.kaleidos.directmessages.ThreadMessageService
 import java.util.Random
 
 class BootStrap {
-    def threadMessageService
+    def mailMessagingService
 
     def init = { servletContext ->
-
-
-
         //Sample data
-
         new User(name:"Admin", password:"admin", username:"admin@example.com", enabled:true).save()
-
-
 
         def roleBF = new Role(authority: 'ROLE_BF', description: 'BF role').save()
         def roleWFC = new Role(authority: 'ROLE_WFC', description: 'WFC role').save()
@@ -25,12 +18,13 @@ class BootStrap {
         UserRole.create(paul, roleBF, true)
 
 
-        def alice = new User(name:"Alice Williams", password:"alice", username:"alice@example.com", enabled:true).save()
-        UserRole.create(alice, roleWFC, true)
+
         def bob = new User(name:"Bob Davis", password:"bob", username:"bob@example.com", enabled:true).save()
         UserRole.create(bob, roleWFC, true)
         def sam = new User(name:"Sam Brown", password:"sam", username:"sam@example.com", enabled:true).save()
         UserRole.create(sam, roleWFC, true)
+        def alice = new User(name:"Alice Williams", password:"alice", username:"alice@example.com", enabled:true).save()
+        UserRole.create(alice, roleWFC, true)
 
 
 
@@ -41,13 +35,13 @@ class BootStrap {
         def user
         90.times{
             user = users[random.nextInt(users.size())]
-            threadMessageService.sendThreadMessage(user.id, paul.id, "Message number ${it}", "Subject ${it}")
+            mailMessagingService.sendMessage(user, paul, "Message number ${it}", "Subject ${it}")
         }
 
 
         90.times{
             user = users[random.nextInt(users.size())]
-            threadMessageService.sendThreadMessage(paul.id, user.id, "Message number ${90+it}", "Subject ${90+it}")
+            mailMessagingService.sendMessage(paul, user, "Message number ${90+it}", "Subject ${90+it}")
         }
 
         Message.list().each {
@@ -58,34 +52,30 @@ class BootStrap {
 
         def message
         //Messages between Paul and Bob
-        message = threadMessageService.sendThreadMessage(paul.id, bob.id, "Hi buddy", "Hello")
+        message = mailMessagingService.sendMessage(paul, bob, "Hi buddy", "Hello")
         message.readed = true
         message.save()
-        message = threadMessageService.sendThreadMessage(bob.id, paul.id, "Hello, my friend", "Hello")
+        message = mailMessagingService.sendMessage(bob, paul, "Hello, my friend", "Hello")
         message.readed = true
         message.save()
-        message = threadMessageService.sendThreadMessage(paul.id, bob.id, "How are you?", "Hello")
+        message = mailMessagingService.sendMessage(paul, bob, "How are you?", "Hello")
 
+        message = mailMessagingService.sendMessage(bob, paul, "Did you seen last night movie?", "Movie")
 
-
-        message = threadMessageService.sendThreadMessage(bob.id, paul.id, "Did you seen last night movie?", "Movie")
-
-
-
-        message = threadMessageService.sendThreadMessage(paul.id, bob.id, "Are you free on friday?", "Friday")
+        message = mailMessagingService.sendMessage(paul, bob, "Are you free on friday?", "Friday")
         message.readed = true
         message.save()
-        message = threadMessageService.sendThreadMessage(bob.id, paul.id, "yes, why?", "Friday")
+        message = mailMessagingService.sendMessage(bob, paul, "yes, why?", "Friday")
 
 
         //Messages between Paul and Alice
-        message = threadMessageService.sendThreadMessage(paul.id, alice.id, "Hi Alice", "How are you?")
+        message = mailMessagingService.sendMessage(paul, alice, "Hi Alice", "How are you?")
         message.readed = true
         message.save()
-        message = threadMessageService.sendThreadMessage(alice.id, paul.id, "Hi Paul", "How are you?")
+        message = mailMessagingService.sendMessage(alice, paul, "Hi Paul", "How are you?")
         message.readed = true
         message.save()
-        message = threadMessageService.sendThreadMessage(paul.id, alice.id, "Are you ok?", "How are you?")
+        message = mailMessagingService.sendMessage(paul, alice, "Are you ok?", "How are you?")
 
 
 
