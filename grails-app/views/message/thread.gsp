@@ -14,7 +14,7 @@
         <div>
             <h2>
                 <g:message code="thread.conversation" />
-                ${otherUser.username}
+                ${otherUser.name}
             </h2>
         </div>
         <g:set var="numHidden" value="${0}" />
@@ -29,8 +29,8 @@
                 <div class="thread_item">
                     <div>
                         <span class="half">
-                            <div><g:message code='thread.to'/>: ${User.get(entry.toId).username}</div>
-                            <div><g:message code='thread.from'/>: ${User.get(entry.fromId).username}</div>
+                            <div><g:message code='thread.to'/>: ${User.get(entry.toId).name}</div>
+                            <div><g:message code='thread.from'/>: ${User.get(entry.fromId).name}</div>
                             <div><g:message code='thread.date'/>: <g:formatDate format="yyyy-MM-dd HH:mm" date="${entry.dateCreated}"/></div>
                         </span>
                         <g:if test="${i == messages.size()-1}">

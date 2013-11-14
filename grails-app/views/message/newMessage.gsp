@@ -18,7 +18,7 @@
 
         <div class="new_message">
             <div>
-                <g:message code='newMessage.to'/>: ${otherUser.username}
+                <g:message code='newMessage.to'/>: ${otherUser.name}
             </div>
             <form method="post" action="<g:createLink mapping='newMessage' />" onsubmit="return checkNewMessage()">
                 <input type="hidden" name="toId" value="${otherUser.id}" />

@@ -119,7 +119,7 @@ class MessageController {
                     flash.error = message(code: 'thread.error')
                 }
             } else {
-                flash.error = message(code: 'block.error', args:[toUser.username])
+                flash.error = message(code: 'block.error', args:[toUser.name])
             }
         }
         redirect mapping: 'inbox'
@@ -166,14 +166,14 @@ class MessageController {
         def otherUser = User.get(params.userId)
 
         if (admin && otherUser && currentUser != otherUser) {
-            def text = "${message(code: 'report.text')} ${otherUser.username} (${otherUser.id})"
+            def text = "${message(code: 'report.text')} ${otherUser.name} (${otherUser.id})"
             threadMessageService.sendThreadMessage(currentUser.id, admin.id, text, message(code: 'report.subject'))
 
             //This need the grails mail plugin
             if (mailService) {
                 mailService.sendMail{
-                    to adminEmail
-                    from currentUser.email
+                    to admin.username
+                    from currentUser.username
                     subject message(code: 'report.subject')
                     body text
                 }
@@ -196,7 +196,7 @@ class MessageController {
                 userBlock = new UserBlock(user:currentUser, userBlocked: otherUser)
                 userBlock.save()
             }
-            flash.message = message(code: 'block.success', args:[otherUser.username])
+            flash.message = message(code: 'block.success', args:[otherUser.name])
         }
         redirect mapping: 'inbox'
     }

@@ -46,7 +46,7 @@
 
                             </td>
                             <td>
-                                ${User.get(entry.fromId).username}
+                                ${User.get(entry.fromId).name}
                                 (${entry.numberOfMessagesOnThread})
                             </td>
                             <td>

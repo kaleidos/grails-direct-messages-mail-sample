@@ -39,7 +39,7 @@
                             </g:if>
                         </td>
                         <td>
-                            ${User.get(entry.toId).username}
+                            ${User.get(entry.toId).name}
                             (${entry.numberOfMessagesOnThread})
                         </td>
                         <td>

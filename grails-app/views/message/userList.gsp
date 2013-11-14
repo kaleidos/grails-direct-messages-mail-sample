@@ -20,7 +20,7 @@
             <table>
                 <g:each in="${userList}" var="u">
                 <tr>
-                    <td>${u.username}</td>
+                    <td>${u.name}</td>
                     <td><g:link mapping="newMessage" params="[toId:u.id]"><g:message code='userList.sendTo'/></g:link></td>
                 </tr>
                 </g:each>
