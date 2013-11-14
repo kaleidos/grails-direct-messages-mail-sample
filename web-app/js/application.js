@@ -15,3 +15,13 @@ function checkNewMessage(){
     }
     return true;
 }
+
+function showDeletedMessages() {
+    var elements = document.getElementsByClassName("thread_container");
+    var i = 0;
+    for (i=0;i<elements.length;i++){
+        elements[i].className = "thread_container";
+    }
+    document.getElementById("show_deleted_message").className = "hidden";
+    return false;
+}

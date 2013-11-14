@@ -17,26 +17,41 @@
                 ${otherUser.username}
             </h2>
         </div>
+        <g:set var="numHidden" value="${0}" />
         <g:each in="${messages}" status="i" var="entry">
-        <div class="thread_item">
-            <div>
-                <span class="half">
-                    <div><g:message code='thread.to'/>: ${User.get(entry.toId).username}</div>
-                    <div><g:message code='thread.from'/>: ${User.get(entry.fromId).username}</div>
-                    <div><g:message code='thread.date'/>: <g:formatDate format="yyyy-MM-dd HH:mm" date="${entry.dateCreated}"/></div>
-                </span>
-                <g:if test="${i == messages.size()-1}">
-                    <span class="half right">
-                        <div><g:link mapping="reportUser" params="[userId:otherUser.id]"><g:message code="thread.report" /></g:link></div>
-                        <div><g:link mapping="blockUser" params="[userId:otherUser.id]"><g:message code="thread.block" /></g:link></div>
-                    </span>
-                </g:if>
+            <g:if test="${entry.isDeletedForUser(user.id)}">
+                <g:set var="numHidden" value="${numHidden+1}" />
+                <div class="thread_container hidden">
+            </g:if>
+            <g:else>
+                <div class="thread_container">
+            </g:else>
+                <div class="thread_item">
+                    <div>
+                        <span class="half">
+                            <div><g:message code='thread.to'/>: ${User.get(entry.toId).username}</div>
+                            <div><g:message code='thread.from'/>: ${User.get(entry.fromId).username}</div>
+                            <div><g:message code='thread.date'/>: <g:formatDate format="yyyy-MM-dd HH:mm" date="${entry.dateCreated}"/></div>
+                        </span>
+                        <g:if test="${i == messages.size()-1}">
+                            <span class="half right">
+                                <div><g:link mapping="reportUser" params="[userId:otherUser.id]"><g:message code="thread.report" /></g:link></div>
+                                <div><g:link mapping="blockUser" params="[userId:otherUser.id]"><g:message code="thread.block" /></g:link></div>
+                            </span>
+                        </g:if>
+                    </div>
+                    <div class="text">
+                        <g:lines string="${entry.text}" />
+                    </div>
+                </div>
             </div>
-            <div class="text">
-                <g:lines string="${entry.text}" />
-            </div>
-        </div>
         </g:each>
+        <g:if test="${numHidden > 0}">
+            <div id="show_deleted_message" class="message">
+                <g:message code='thread.deletedMessages' args="[numHidden]"/>&nbsp;
+                <a href="#" onClick="return showDeletedMessages()"><g:message code='thread.deletedMessages.view'/></a>
+            </div>
+        </g:if>
         <div class="new_message">
             <g:message code='thread.reply'/>
             <form method="post" action="<g:createLink mapping='newMessage' />" onsubmit="return checkNewMessage()">
