@@ -114,7 +114,7 @@ class MessageController {
             def userBlock = UserBlock.findByUserAndUserBlocked(toUser, currentUser)
             if (!userBlock) {
                 if (params.subject && params.text && params.text.size()<=5000) {
-                    mailMessagingService.sendMessage(currentUser.id, toUser.id, params.text, params.subject)
+                    mailMessagingService.sendMessage(currentUser, toUser, params.text, params.subject)
                     flash.message = message(code: 'thread.success')
                 } else {
                     flash.error = message(code: 'thread.error')
@@ -168,7 +168,7 @@ class MessageController {
 
         if (admin && otherUser && currentUser != otherUser) {
             def text = "${message(code: 'report.text')} ${otherUser.name} (${otherUser.id})"
-            mailMessagingService.sendMessage(currentUser.id, admin.id, text, message(code: 'report.subject'))
+            mailMessagingService.sendMessage(currentUser, admin, text, message(code: 'report.subject'))
 
             //This need the grails mail plugin
             if (mailService) {
