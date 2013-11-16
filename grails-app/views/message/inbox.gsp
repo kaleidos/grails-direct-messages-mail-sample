@@ -37,7 +37,7 @@
                         <tr <g:if test="${!entry.readed}">class="unreaded"</g:if>>
                             <td><input type="checkbox" name="deleteId" value="${entry.id}" /></td>
                             <td>
-                                <g:if test="${entry.lastOnThread}">
+                                <g:if test="${! entry.lastOnThread}">
                                     <img src="${resource(dir: 'images', file: 'arrowLeft.png')}" />
                                 </g:if>
                                 <g:else>
